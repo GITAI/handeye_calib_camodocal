@@ -31,6 +31,7 @@
   <depend>libgflags-dev</depend>
   <depend>libgoogle-glog-dev</depend>
   <depend>libceres-dev</depend>
+  <depend>libopencv-dev</depend>
   <depend>eigen</depend>
   <depend>roscpp</depend>
   <depend>tf</depend>
