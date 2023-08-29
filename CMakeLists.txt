@@ -34,7 +34,7 @@ message("Glog found = ${GLOG_FOUND}")
 SET(Gflags_FOUND ${GFLAGS_FOUND})
 SET(Glog_FOUND ${GLOG_FOUND})
 
-find_package(Threads QUIET)
+find_package(Threads REQUIRED)
 find_package(Ceres QUIET REQUIRED)
 SET(GFLAGS_LIBRARY ${CMAKE_THREAD_LIBS_INIT})
 ## System dependencies are found with CMake's conventions
@@ -215,7 +215,7 @@ add_executable(handeye_calib_camodocal
 ## Specify libraries to link a library or executable target against
 message("GLOG = ${GLOG_LIBRARIES}  ${GLOG_LIB}  ${GLOG_LIBS}")
 target_link_libraries(handeye_calib_camodocal
-  ${catkin_LIBRARIES} ${GLOG_LIBRARIES}  ${GLOG_LIB}  ${GLOG_LIBS} ${OpenCV_LIBRARIES} ${CERES_LIBRARIES}
+  ${catkin_LIBRARIES} ${GLOG_LIBRARIES}  ${GLOG_LIB}  ${GLOG_LIBS} ${OpenCV_LIBRARIES} Threads::Threads ${CERES_LIBRARIES}
 )
 #############
 ## Install ##
