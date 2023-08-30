@@ -28,15 +28,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 find_package(Gflags REQUIRED)
 find_package(Glog REQUIRED)
-
-message("Gflags found = ${GFLAGS_FOUND}")
-message("Glog found = ${GLOG_FOUND}")
-SET(Gflags_FOUND ${GFLAGS_FOUND})
-SET(Glog_FOUND ${GLOG_FOUND})
-
-find_package(Threads QUIET)
-find_package(Ceres QUIET REQUIRED)
-SET(GFLAGS_LIBRARY ${CMAKE_THREAD_LIBS_INIT})
+find_package(Threads REQUIRED)
+find_package(Ceres REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -190,7 +183,12 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
-  ${catkin_INCLUDE_DIRS} ./src
+  ${catkin_INCLUDE_DIRS}
+  ${GLOG_INCLUDE_DIRS}
+  ${GFLAGS_INCLUDE_DIRS}
+  ${CELES_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+  ./src
 )
 
 ## Declare a C++ library
@@ -213,9 +211,8 @@ add_executable(handeye_calib_camodocal
 # add_dependencies(handeye_calib_camodocal_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-message("GLOG = ${GLOG_LIBRARIES}  ${GLOG_LIB}  ${GLOG_LIBS}")
 target_link_libraries(handeye_calib_camodocal
-  ${catkin_LIBRARIES} ${GLOG_LIBRARIES}  ${GLOG_LIB}  ${GLOG_LIBS} ${OpenCV_LIBRARIES} ${CERES_LIBRARIES}
+  ${catkin_LIBRARIES} ${GLOG_LIBRARIES} ${GFLAGS_LIBRARIES} ${OpenCV_LIBRARIES} Threads::Threads ${CERES_LIBRARIES}
 )
 #############
 ## Install ##
